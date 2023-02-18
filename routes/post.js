@@ -14,6 +14,7 @@ import {
   likePost,
   addComment,
   removeComment,
+  posts,
 } from "../controller/post";
 
 // middleware
@@ -46,5 +47,6 @@ router.put("/remove-comment", requireSignIn, removeComment);
 router.put("/unlike-post", requireSignIn, unlikePost);
 router.get("/total-post", totalPost);
 router.get("user-post/:_id", userPost);
+router.get("/posts", posts);
 
 module.exports = router;

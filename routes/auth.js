@@ -9,9 +9,11 @@ import {
   forgetPassword,
   userFollow,
   addFollower,
+  getUser,
   userFollowing,
   removeFollower,
   userUnfollow,
+  searchUser,
 } from "../controller/auth";
 
 // middleware
@@ -28,5 +30,7 @@ router.get("/find-people", requireSignIn, findPeople);
 router.put("/user-follow", requireSignIn, addFollower, userFollow);
 router.get("/user-following", requireSignIn, userFollowing);
 router.put("/user-unfollow", requireSignIn, removeFollower, userUnfollow);
+router.get("/search-user/:query", searchUser);
+router.get("/user/:username", getUser);
 
 module.exports = router;

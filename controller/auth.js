@@ -275,3 +275,33 @@ export const userUnfollow = async (req, res) => {
     console.log("Error in unfollowing the user in userUnfollow controller", e);
   }
 };
+
+// Search user controller
+export const searchUser = async (req, res) => {
+  const { query } = req.params;
+  if (!query) return;
+  try {
+    const user = await User.find({
+      $or: [
+        // regex is special to mongoDB and here it is used for performing
+        // case insensitive seach
+        { name: { $regex: query, $options: "i" } },
+        { username: { $regex: query, $options: "i" } },
+      ],
+    }).select("-password -secret");
+    res.json(user);
+  } catch (e) {
+    console.log("Error in searching the user", e);
+  }
+};
+
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username }).select(
+      "-password -secret"
+    );
+    res.json(user);
+  } catch (e) {
+    console.log("Error in finding the user", e);
+  }
+};
