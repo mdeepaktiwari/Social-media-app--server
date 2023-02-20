@@ -17,7 +17,7 @@ import {
 } from "../controller/auth";
 
 // middleware
-import { requireSignIn } from "../middlewares";
+import { isAdmin, requireSignIn } from "../middlewares";
 
 // routes
 // user related request handled from here
@@ -32,5 +32,5 @@ router.get("/user-following", requireSignIn, userFollowing);
 router.put("/user-unfollow", requireSignIn, removeFollower, userUnfollow);
 router.get("/search-user/:query", searchUser);
 router.get("/user/:username", getUser);
-
+router.get("/current-admin", requireSignIn, isAdmin, currentUser);
 module.exports = router;

@@ -17,8 +17,12 @@ export const createPost = async (req, res) => {
   }
   try {
     const post = new Post({ content, image, postedBy: req.auth._id });
-    post.save();
-    res.json(post);
+    await post.save();
+    const postWithUser = await Post.findById(post._id).populate(
+      "postedBy",
+      "-password -secret"
+    );
+    res.json(postWithUser);
   } catch (e) {
     console.log("Error in creating the post", e);
     res.sendStatus(400);
@@ -103,8 +107,8 @@ export const newsFeed = async (req, res) => {
 
     const post = await Post.find({ postedBy: { $in: following } })
       .skip((currentPage - 1) * perPage)
-      .populate("postedBy", "_id, name, image")
-      .populate("comments.postedBy", "_id, name , image")
+      .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image")
       .sort({ createdAt: -1 })
       .limit(perPage);
     res.json(post);
@@ -203,5 +207,17 @@ export const posts = async (req, res) => {
     return res.json(user);
   } catch (e) {
     console.log("Error in fetching post", e);
+  }
+};
+
+export const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params._id)
+      .populate("postedBy", "_id name image")
+      .populate("comments.postedBy", "_id name image");
+
+    return res.json(post);
+  } catch (e) {
+    console.log("Error in getting the post ", e);
   }
 };

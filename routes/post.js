@@ -15,10 +15,11 @@ import {
   addComment,
   removeComment,
   posts,
+  getPost,
 } from "../controller/post";
 
 // middleware
-import { requireSignIn, canEditDeletePost } from "../middlewares";
+import { requireSignIn, canEditDeletePost, isAdmin } from "../middlewares";
 
 // router
 // post related request taken up here
@@ -48,5 +49,13 @@ router.put("/unlike-post", requireSignIn, unlikePost);
 router.get("/total-post", totalPost);
 router.get("user-post/:_id", userPost);
 router.get("/posts", posts);
+router.get("/post/:_id", getPost);
 
+// admin access
+router.delete(
+  "/admin/delete-post/:_id",
+  requireSignIn,
+  isAdmin,
+  deletePost
+);
 module.exports = router;
