@@ -61,3 +61,51 @@ http.listen(port, () => console.log("Server is running on port", port));
 // merncamp.com/api
 // merncamp.com/socket.io
 // as we are using socket.io we need to add different path for socket
+
+// ssh root@IP
+// adduser fsadmin
+// usermod -aG sudo fsadmin
+// sudo su fsadmin
+// sudo vim /etc/ssh/sshd_config
+// escape and :wq
+// sudo service ssh restart
+// push the local repository to gitHub
+// curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
+// nano nodesource_setup.sh
+// sudo bash nodesource_setup.sh
+// sudo apt-get install nodejs
+// clone the git
+// cd project
+// sudo apt-get install nginex
+// cd /etc/nginx/sites-available
+// sudo vim default
+// location/api{
+
+// }
+// location/{
+
+// }
+
+// sudo nginx -t
+// sudo systenctl restart nginx
+// sudo touch .env
+// sudo vim .env
+// add environment variable
+
+// echo "deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/6.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+// sudo apt update
+// sudo apt install -y mongodb
+// sudo systemctl status mongodb
+// show dbs
+// user nodeapi
+// sudo npm i -g pm2
+// cd server
+// sudo npm install
+// pm2 start -r esm server.js
+
+// cd client
+// sudo touch .env.local
+// sudo vim .env.local
+// add env variable
+// sudo npm run built
+// pm1 start npm --start
